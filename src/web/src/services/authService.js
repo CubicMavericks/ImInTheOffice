@@ -1,11 +1,31 @@
+
 export default class AuthService {
     signIn(email, callback) {
-        return callback({
-            user: {
-                name: "Filipe Lima",
-                email: email,
-                id: "f110d913-8d45-41bb-933a-d94069761332"
+        const requestOptions = {
+            crossDomain:true,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        };
+        fetch('http://localhost:5031/Identity/login', requestOptions)
+        .then(response => response.json())
+        .then(async response => {
+            debugger;
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
             }
+
+          //  this.setState({ postId: data.id })
+        })
+        .catch(error => {
+         //   this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
         });
     }
 

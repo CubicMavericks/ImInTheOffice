@@ -1,7 +1,8 @@
 using Api.Configurations;
+using Api.Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("appsettings.Development.json");
+//builder.Configuration.AddJsonFile("appsettings.Development.json");
 
 // Add services to the container.
 
@@ -11,6 +12,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMongoDB(builder.Configuration);
 builder.Services.RegisterRepositories();
+builder.Services.AddSignalR();
+
+//  builder.Services.AddCors(options =>{
+//                 options.AddPolicy("Auth", builder =>
+//                     builder.AllowAnyOrigin()
+//                             .AllowAnyMethod()
+//                             .AllowAnyHeader());
+//             });
 
 var app = builder.Build();
 
@@ -23,8 +32,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseRouting();
+// app.UseCors("Auth");
+
+app.UseEndpoints(endpoints =>{
+   endpoints.MapHub<NotificationHub>("/notificationHub");
+});
 app.Run();
