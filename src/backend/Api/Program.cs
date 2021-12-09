@@ -14,12 +14,12 @@ builder.Services.AddMongoDB(builder.Configuration);
 builder.Services.RegisterRepositories();
 builder.Services.AddSignalR();
 
-//  builder.Services.AddCors(options =>{
-//                 options.AddPolicy("Auth", builder =>
-//                     builder.AllowAnyOrigin()
-//                             .AllowAnyMethod()
-//                             .AllowAnyHeader());
-//             });
+ builder.Services.AddCors(options =>{
+                options.AddPolicy("Api", builder =>
+                    builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+            });
 
 var app = builder.Build();
 
@@ -37,7 +37,7 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.UseRouting();
-// app.UseCors("Auth");
+app.UseCors("Api");
 
 app.UseEndpoints(endpoints =>{
    endpoints.MapHub<NotificationHub>("/notificationHub");
