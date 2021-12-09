@@ -1,15 +1,12 @@
-import { Routes, Route } from "react-router-dom";
-
+import { Button } from "@mui/material";
 import "./App.css";
-import SignIn from "./SignIn";
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<SignIn />} />
-      <Route path="/signin" element={<SignIn />} />
-    </Routes>
-  );
-}
+import { useAuth } from "./components/Auth";
+
+const App = () => {
+  const auth = useAuth();
+
+  return <Button onClick={() => auth.signOut()}>Sign Out</Button>;
+};
 
 export default App;
