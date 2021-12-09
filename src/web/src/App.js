@@ -1,12 +1,50 @@
-import { Button } from "@mui/material";
-import "./App.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Container, Box, Grid, Paper } from "@mui/material";
 
-import { useAuth } from "./components/Auth";
+import CustomAppBar from "./components/CustomAppBar";
+import CheckInButton from "./components/CheckInButton";
+import CheckOutButton from "./components/CheckOutButton";
+import PresenceList from "./components/PresenceList";
+
+const theme = createTheme();
 
 const App = () => {
-  const auth = useAuth();
-
-  return <Button onClick={() => auth.signOut()}>Sign Out</Button>;
+  return (
+    <ThemeProvider theme={theme}>
+      <Box>
+        <CustomAppBar />
+        <Container maxWidth="md">
+          <Box
+            sx={{
+              m: 3,
+              flexGrow: 1,
+              justifyContent: "space-evenly",
+              display: { xs: "flex", md: "flex" },
+            }}
+          >
+            <CheckInButton />
+            <CheckOutButton />
+          </Box>
+        </Container>
+        <Container maxWidth="md">
+          <Box
+            sx={{
+              m: 3,
+              flexGrow: 1,
+              justifyContent: "space-evenly",
+              display: { xs: "flex", md: "flex" },
+            }}
+          >
+            <Grid item xs={12}>
+              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                <PresenceList />
+              </Paper>
+            </Grid>
+          </Box>
+        </Container>
+      </Box>
+    </ThemeProvider>
+  );
 };
 
 export default App;

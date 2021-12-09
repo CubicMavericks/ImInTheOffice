@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import CssBaseline from '@mui/material/CssBaseline';
 
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,6 +13,7 @@ import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
+    <CssBaseline />
     <AuthProvider>
       <BrowserRouter>
         <Routes>

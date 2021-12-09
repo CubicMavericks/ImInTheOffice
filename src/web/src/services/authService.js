@@ -14,7 +14,8 @@ export default class AuthService {
 
         if (!response.ok) {
           const error = (data && data.message) || response.status;
-          return Promise.reject(error);
+          console.error(error);
+          return;
         }
 
         if (callback) {
