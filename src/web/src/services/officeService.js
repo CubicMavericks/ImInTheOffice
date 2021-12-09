@@ -19,7 +19,7 @@ const request = async (userId, resource) => {
         const data = await response.json();
     
         if(!response.ok){
-                const error = (data && data.message) || response.stastus;
+                const error = (data && data.message) || response.status;
                 return error;
         }
         return data;

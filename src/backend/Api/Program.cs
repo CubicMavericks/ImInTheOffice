@@ -2,28 +2,24 @@ using Api.Configurations;
 using Api.Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Configuration.AddJsonFile("appsettings.Development.json");
+var allowAllOrigins = "_allowAllOrigins";
 
-// Add services to the container.
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(allowAllOrigins, b =>
+        b.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMongoDB(builder.Configuration);
 builder.Services.RegisterRepositories();
 builder.Services.AddSignalR();
 
- builder.Services.AddCors(options =>{
-                options.AddPolicy("Api", builder =>
-                    builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader());
-            });
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,15 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//app.UseAuthorization();
-
 app.MapControllers();
-
 app.UseRouting();
-app.UseCors("Api");
+app.UseCors(allowAllOrigins);
+app.UseEndpoints(endpoints => endpoints.MapHub<NotificationHub>("/notificationHub"));
 
-app.UseEndpoints(endpoints =>{
-   endpoints.MapHub<NotificationHub>("/notificationHub");
-});
 app.Run();
