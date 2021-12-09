@@ -8,9 +8,9 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IRepository<Users> _userRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IRepository<Users> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -23,11 +23,11 @@ namespace Api.Controllers
                 Name = userLogin.Name
             };
 
-            var user = await _userRepository.FindByName(userEntity.Name);
+            var user = await _userRepository.Find(u => u.Name == userEntity.Name);
 
             if(user == null){
                 await _userRepository.Insert(userEntity);
-                user = await _userRepository.FindByName(userEntity.Name);
+                user = await _userRepository.Find(u => u.Name == userEntity.Name);
             }
 
            return Ok(user);
