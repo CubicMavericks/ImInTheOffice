@@ -18,19 +18,14 @@ namespace Api.Controllers
         [HttpPost("signIn")]
         public async Task<IActionResult> SignIn(UserLoginRequest userLogin)
         {
-            var userEntity = new Users{
-                Email = userLogin.Email,
-                Name = userLogin.Name
-            };
+            var user = await _userRepository.Find(u => u.Email == userLogin.Email);
 
-            var user = await _userRepository.Find(u => u.Name == userEntity.Name);
-
-            if(user == null){
-                await _userRepository.Insert(userEntity);
-                user = await _userRepository.Find(u => u.Name == userEntity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
             }
-
-           return Ok(user);
+            
+            return Ok(user);
         }
     }
 }
