@@ -1,9 +1,14 @@
-import './App.css';
-import Login from './Login';
+import { Routes, Route } from "react-router-dom";
+
+import "./App.css";
+import SignIn from "./SignIn";
 
 function App() {
   return (
-    <Login />
+    <Routes>
+      <Route path="/" element={<SignIn />} />
+      <Route path="/signin" element={<SignIn />} />
+    </Routes>
   );
 }
 
