@@ -6,7 +6,7 @@ namespace Api.Configurations
     {
         public static void RegisterRepositories(this IServiceCollection services)
         {
-             services.AddSingleton<IUserRepository, UserRepository>();
+             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }
