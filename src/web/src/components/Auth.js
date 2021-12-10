@@ -34,13 +34,19 @@ export function AuthProvider({children}) {
     const authService = new AuthService();
     const [user, setUser] = useLocalStorage("user", null);
 
-    const signIn = (email, callback) => {
-        return authService.signIn(email, (userInfo) => {
+    const signIn = (email, callback, failCallback) => {
+        return authService.signIn(email,
+          (userInfo) => {
             setUser(userInfo);
             if (callback) {
                 callback();
             }
-        });
+          },
+          () => {
+            if (failCallback) {
+              failCallback();
+            }
+          });
     }
 
     const signOut = (callback) => {
