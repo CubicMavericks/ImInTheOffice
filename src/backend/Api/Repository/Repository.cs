@@ -28,5 +28,14 @@ namespace Api.Repository
 
         public async Task<TEntity> Find(Expression<Func<TEntity, bool>> expression) =>
             await _collection.Find(expression).FirstOrDefaultAsync();
+
+        public async Task<TEntity> Find(FilterDefinition<TEntity> filter) =>
+            await _collection.Find(filter).FirstOrDefaultAsync();
+
+        public async Task<List<TEntity>> List(Expression<Func<TEntity, bool>> expression) =>
+            await _collection.Find(expression).ToListAsync();
+
+        public async Task<List<TEntity>> List(FilterDefinition<TEntity> filter) =>
+            await _collection.Find(filter).ToListAsync();
     }
 }

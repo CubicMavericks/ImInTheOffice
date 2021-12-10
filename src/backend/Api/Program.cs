@@ -1,5 +1,5 @@
 using Api.Configurations;
-using Api.Notifications;
+using Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Configuration.AddJsonFile("appsettings.Development.json");
@@ -40,6 +40,6 @@ app.UseRouting();
 app.UseCors("Api");
 
 app.UseEndpoints(endpoints =>{
-   endpoints.MapHub<NotificationHub>("/notificationHub");
+   endpoints.MapHub<NotificationHub>("hubs/notification");
 });
 app.Run();
