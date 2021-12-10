@@ -7,9 +7,10 @@ var allowAllOrigins = "_allowAllOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(allowAllOrigins, b =>
-        b.AllowAnyOrigin()
+        b.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +32,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.MapControllers();
-app.UseRouting();
 app.UseCors(allowAllOrigins);
-app.UseEndpoints(endpoints => endpoints.MapHub<NotificationHub>("/notificationHub"));
+app.UseRouting();
+app.UseAuthorization();
+app.UseEndpoints(endpoints => endpoints.MapHub<NotificationHub>("/hubs/notification"));
 app.Run();
