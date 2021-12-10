@@ -1,5 +1,6 @@
 using Api.Configurations;
 using Api.Notifications;
+using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowAllOrigins = "_allowAllOrigins";
@@ -17,6 +18,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMongoDB(builder.Configuration);
 builder.Services.RegisterRepositories();
 builder.Services.AddSignalR();
+builder.Services.AddLogging();
+builder.Services.AddHttpLogging(s => s.LoggingFields = HttpLoggingFields.All);
 
 var app = builder.Build();
 
@@ -26,6 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseRouting();
