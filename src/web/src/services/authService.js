@@ -1,3 +1,7 @@
+import toastr from "toastr";
+
+const signInFailureAlert = () => toastr.error("Please check the e-mail address.", "Unauthorized")
+
 export default class AuthService {
   signIn(email, callback, failCallback) {
     
@@ -16,6 +20,8 @@ export default class AuthService {
           const error = (data && data.message) || response.status;
           console.error(error);
 
+          signInFailureAlert();
+
           if (failCallback) {
             failCallback();
           }
@@ -28,7 +34,7 @@ export default class AuthService {
         }
       })
       .catch((error) => {
-        console.error("There was an error!", error);
+        signInFailureAlert();
 
         if (failCallback) {
           failCallback();

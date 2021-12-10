@@ -10,6 +10,7 @@ import { RequireAuth, AuthProvider } from "./components/Auth";
 import SignIn from "./SignIn";
 
 import "./index.css";
+import "toastr/build/toastr.css";
 
 ReactDOM.render(
   <React.StrictMode>
