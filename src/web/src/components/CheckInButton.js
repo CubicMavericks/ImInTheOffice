@@ -9,7 +9,7 @@ const CheckInButton = () => {
         size="medium"
         endIcon={<ThumbUp />}
       >
-        I'm in the office!
+        I'm in the office
       </Button>
     </div>
   );

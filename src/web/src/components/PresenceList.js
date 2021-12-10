@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';
 
 export default function PresenceList() {
+  // Todo replace this with API call.
   const data = [
     {
       name: "Alexandre",
@@ -36,7 +37,9 @@ export default function PresenceList() {
   ];
 
   return (
-    <List sx={{ width: '100%' }}>
+    !data || data.length === 0
+      ? <Typography>No one has checked in yet...</Typography> 
+      : <List sx={{ width: '100%' }}>
       {data.map((person, index) =>
           <Box key={index}>
           <ListItem alignItems="flex-start">

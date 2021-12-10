@@ -8,7 +8,7 @@ const CheckInButton = () => {
       size="medium"
       endIcon={<ThumbDown />}
     >
-      I'm not in the office!
+      I'm not in the office
     </Button>
   );
 };
