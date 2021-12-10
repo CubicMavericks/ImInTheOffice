@@ -21,7 +21,25 @@ export default function PresenceList() {
   React.useEffect(() => {
     officeService.list(
       (result) => setPeopleInTheOffice(result),
-      () => setPeopleInTheOffice([]))
+      () => setPeopleInTheOffice([]));
+
+       const connection = new HubConnectionBuilder()
+            .withUrl('https://localhost:7128/hubs/notification')
+            .withAutomaticReconnect()
+            .build();
+
+        connection.start()
+            .then(result => {
+                console.log('Connected!');
+
+                connection.on('ReceiveMessage', message => {
+                    const updatedChat = [...latestChat.current];
+                    updatedChat.push(message);
+                
+                    setChat(updatedChat);
+                });
+            })
+            .catch(e => console.log('Connection failed: ', e));
     }, []);
 
   return (
