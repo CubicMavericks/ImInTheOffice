@@ -38,7 +38,7 @@ const CustomAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            I'm in the office
+            Is {auth.user.name} in the Office?
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
             <IconButton
@@ -55,7 +55,7 @@ const CustomAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            I'm in the office
+            Is {auth.user.name} in the Office?
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
