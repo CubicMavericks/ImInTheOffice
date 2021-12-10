@@ -16,6 +16,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7262732eee179af215faab36a7f3c3cfac93ba12af52a3888d839fe7e53420/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/86d9944d7dc6247b332d77355bfabdb7cd68928cf33921b80ea70c795ef7c26/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a89c43b9e4639a86ef72bfbdd915cf3a88d4582ea46a7bc809f17b1baa77abf/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -31,7 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="XThreadsFramesViewSplitterKey" value="0.9145299" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.75944334" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -75,16 +76,55 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Api/Controllers/UserController.cs</url>
-          <line>32</line>
+          <line>45</line>
           <properties documentPath="$PROJECT_DIR$/Api/Controllers/UserController.cs" initialLine="32" containingFunctionPresentation="method 'SignUp'">
             <startOffsets>
-              <option value="860" />
+              <option value="1500" />
             </startOffsets>
             <endOffsets>
-              <option value="861" />
+              <option value="1501" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>102</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="102" containingFunctionPresentation="method 'ListUsers'">
+            <startOffsets>
+              <option value="3775" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3776" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>65</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="65" containingFunctionPresentation="method 'Checkout'">
+            <startOffsets>
+              <option value="2410" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2411" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>28</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="28" containingFunctionPresentation="method 'Checkin'">
+            <startOffsets>
+              <option value="1006" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1007" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

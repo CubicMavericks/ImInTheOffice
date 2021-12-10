@@ -1,9 +1,8 @@
 import toastr from "toastr";
 
 const alertError = (message) => toastr.error(message, "Something went wrong");
-// const alertSuccess = (message, action) => toastr.success(message, action);
 
-const request = (userId, resource, successCallback, failCallback, action) => {
+const requestStatusChange = (userId, resource, successCallback, failCallback, action) => {
   const requestOptions = {
     crossDomain: true,
     method: "POST",
@@ -41,23 +40,54 @@ const request = (userId, resource, successCallback, failCallback, action) => {
     });
 };
 
+const query = (resource, successCallback, failCallback, action) => {
+  const requestOptions = {
+    crossDomain: true,
+    method: "GET"
+  };
+
+  fetch(
+    "https://localhost:7128/office/" + resource,
+    requestOptions
+  )
+    .then(async (response) => {
+      const data = await response.json();
+      console.log(data);
+
+      if (!response.ok) {
+        const error = (data && data.message) || response.status;
+        alertError("Failed to " + action);
+
+        if (failCallback) {
+          failCallback();
+        }
+
+        return error;
+      }
+
+      if (successCallback) {
+        successCallback(data);
+      }
+    })
+    .catch((error) => {
+      alertError("Failed to " + action);
+
+      if (failCallback) {
+        failCallback();
+      }
+    });
+};
+
 export default class OfficeService {
-  async checkIn(userId, successCallback, failCallback) {
-    return request(
-      userId,
-      "checkin",
-      successCallback,
-      failCallback,
-      "Check In"
-    );
+  checkIn(userId, successCallback, failCallback) {
+    requestStatusChange(userId, "checkin", successCallback, failCallback, "Check In");
   }
-  async checkOut(userId, successCallback, failCallback) {
-    return request(
-      userId,
-      "checkout",
-      successCallback,
-      failCallback,
-      "Check Out"
-    );
+
+  checkOut(userId, successCallback, failCallback) {
+    requestStatusChange(userId, "checkout", successCallback, failCallback, "Check Out");
+  }
+
+  list(successCallback, failCallback) {
+    query("list", successCallback, failCallback, "get who else in the office")
   }
 }

@@ -133,7 +133,8 @@ namespace Api.Controllers
                                                     Avatar = u.Avatar, 
                                                     DateCheckin = uio.DateLastCheckin, 
                                                     DateCheckout = uio.DateLastCheckout,
-                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" });
+                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" })
+                    .OrderByDescending(s => Math.Max(s.DateCheckin.Ticks, s.DateCheckout.Ticks)).ToList();
 
                 return Ok(result);
             }
