@@ -6,6 +6,7 @@ export default class OfficeService{
         return request(userId, "checkout")
     }
 }
+
 const request = async (userId, resource) => {
     const requestOptions = {
         crossDomain:true,

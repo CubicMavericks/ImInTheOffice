@@ -1,8 +1,6 @@
-import { ThumbDown } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
-
-
 
 const CheckInButton = () => {
   const [checkingOut, setCheckingOut] = useState(false);
@@ -16,7 +14,7 @@ const CheckInButton = () => {
     <Button
       variant="contained"
       size="medium"
-      endIcon={<ThumbDown />}
+      endIcon={<Home />}
       disabled={checkingOut}
       onClick={() => handleOnClick()}
     >
@@ -26,3 +24,8 @@ const CheckInButton = () => {
 };
 
 export default CheckInButton;
+
+// TODO
+// 1 - Change check in and checkout to register the type of action
+// 2 - Sign end point should return status (checkin/checkout)
+// 3 - Fetch list of today's attendancy order by reverse datetime.

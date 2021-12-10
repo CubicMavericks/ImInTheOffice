@@ -1,4 +1,4 @@
-import { ThumbUp } from "@mui/icons-material";
+import { Work } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ const CheckInButton = () => {
         size="medium"
         disabled={checkingIn}
         onClick={() => handleInClick()}
-        endIcon={<ThumbUp />}
+        endIcon={<Work />}
       >
         I'm in the office
       </Button>

@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { ThumbUp, ThumbDown } from '@mui/icons-material';
+import { Work, Home } from '@mui/icons-material';
 
 export default function PresenceList() {
   // Todo replace this with API call.
@@ -62,7 +62,7 @@ export default function PresenceList() {
               }
             />
             <ListItemIcon>
-              {person.action === "checkIn" ? <ThumbUp /> : <ThumbDown />}
+              {person.action === "checkIn" ? <Work /> : <Home />}
             </ListItemIcon>
           </ListItem>
           {index !== (data.length - 1) && <Divider variant="inset" component="li" />}
