@@ -11,11 +11,19 @@ import Typography from '@mui/material/Typography';
 import { Work, Home } from '@mui/icons-material';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
+import toastr from "toastr";
+
 import male from "../assets/male.png";
 import female from "../assets/female.png";
 import OfficeService from '../services/officeService';
+import { useAuth } from "./Auth";
+
+const alertUpdate = (user) =>  {
+  toastr.info(user.name + " " + (user.action === "Checkin" ? "came to the office" : "left the office"));
+}
 
 export default function PresenceList() {
+  var auth = useAuth();
   var officeService = new OfficeService();
   var [peopleInTheOffice, setPeopleInTheOffice] = React.useState([]);
 
@@ -34,7 +42,10 @@ export default function PresenceList() {
                 console.log('Connected!');
 
                 connection.on('ReceiveNotification', message => {
-                  setPeopleInTheOffice(message);
+                  setPeopleInTheOffice(message.office);
+                  if (message.user.id !== auth.user.id) {
+                    alertUpdate(message.user);
+                  }
                 });
             })
             .catch(e => console.log('Connection failed: ', e));

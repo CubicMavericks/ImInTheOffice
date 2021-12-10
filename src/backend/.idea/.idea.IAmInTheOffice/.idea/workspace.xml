@@ -89,32 +89,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
-          <line>102</line>
-          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="102" containingFunctionPresentation="method 'ListUsers'">
-            <startOffsets>
-              <option value="3775" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3776" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
-          <line>65</line>
-          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="65" containingFunctionPresentation="method 'Checkout'">
-            <startOffsets>
-              <option value="2410" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2411" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
           <line>28</line>
           <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="28" containingFunctionPresentation="method 'Checkin'">
             <startOffsets>

@@ -43,8 +43,13 @@ namespace Api.Controllers
                 }
                 
                 var result = await GetEverybodyInOffice();
+                var user = result.FirstOrDefault(s => s.Id == userId);
 
-                await _notificationHub.Clients.All.ReceiveNotification(result);
+                await _notificationHub.Clients.All.ReceiveNotification(new
+                {
+                    Office = result,
+                    User = user
+                });
 
                 return Ok();
             }
@@ -75,7 +80,13 @@ namespace Api.Controllers
 
                 var result = await GetEverybodyInOffice();
 
-                await _notificationHub.Clients.All.ReceiveNotification(result);
+                var user = result.FirstOrDefault(s => s.Id == userId);
+
+                await _notificationHub.Clients.All.ReceiveNotification(new
+                {
+                    Office = result,
+                    User = user
+                });
 
                 return Ok();
             }
