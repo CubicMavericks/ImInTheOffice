@@ -27,5 +27,27 @@ namespace Api.Controllers
             
             return Ok(user);
         }
+
+        [HttpPost("signUp")]
+        public async Task<IActionResult> SignUp(UserSignUpRequest request)
+        {
+            var userWithEmailExists =  await _userRepository.Find(s => s.Email == request.Email);
+
+            if (userWithEmailExists != null)
+            {
+                return BadRequest("A user with the specified email already exists");
+            }
+            
+            await _userRepository.Insert(new Users
+            {
+                Email = request.Email,
+                Name = request.Name,
+                Avatar = request.Avatar
+            });
+
+            var insertedUser = await _userRepository.Find(s => s.Email == request.Email);
+
+            return Ok(insertedUser);
+        }
     }
 }
