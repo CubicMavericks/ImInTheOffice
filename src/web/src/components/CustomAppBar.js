@@ -18,7 +18,7 @@ import female from "../assets/female.png";
 const CustomAppBar = () => {
   const auth = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const avatar = auth.avatar === "male" ? male : female;
+  const avatar = auth.user.avatar === "male" ? male : female;
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
