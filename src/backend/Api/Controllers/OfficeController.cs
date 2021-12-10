@@ -49,7 +49,18 @@ namespace Api.Controllers
 
                 var users = await _userRepository.List(filter);
 
-                await _notificationHub.Clients.All.ReceiveNotification(users);
+                var result = listOfUserInOffice.Join(users, 
+                                                    uio => uio.UserId,
+                                                    u => u.Id,
+                                                    (uio, u) => new {
+                                                    Id = u.Id, Name = u.Name, 
+                                                    Avatar = u.Avatar, 
+                                                    DateCheckin = uio.DateLastCheckin, 
+                                                    DateCheckout = uio.DateLastCheckout,
+                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" });
+
+
+                await _notificationHub.Clients.All.ReceiveNotification(result);
 
                 return Ok();
             }
