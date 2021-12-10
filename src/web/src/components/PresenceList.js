@@ -9,6 +9,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Work, Home } from '@mui/icons-material';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 
 import male from "../assets/male.png";
 import female from "../assets/female.png";
@@ -32,11 +33,8 @@ export default function PresenceList() {
             .then(result => {
                 console.log('Connected!');
 
-                connection.on('ReceiveMessage', message => {
-                    const updatedChat = [...latestChat.current];
-                    updatedChat.push(message);
-                
-                    setChat(updatedChat);
+                connection.on('ReceiveNotification', message => {
+                  setPeopleInTheOffice(message);
                 });
             })
             .catch(e => console.log('Connection failed: ', e));

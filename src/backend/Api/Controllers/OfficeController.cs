@@ -1,5 +1,6 @@
 using Api.Exceptions;
 using Api.Hubs;
+using Api.Models;
 using Api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -41,24 +42,7 @@ namespace Api.Controllers
                     await _officeRepository.Update(o => o.Id == office.Id, office);
                 }
                 
-                var listOfUserInOffice = await _officeRepository.List(officeFilter);
-                var userIds = listOfUserInOffice.Select(s => s.UserId).ToList();
-
-                var filterBuilder = Builders<Users>.Filter;
-                var filter = filterBuilder.In(x => x.Id, userIds);
-
-                var users = await _userRepository.List(filter);
-
-                var result = listOfUserInOffice.Join(users, 
-                                                    uio => uio.UserId,
-                                                    u => u.Id,
-                                                    (uio, u) => new {
-                                                    Id = u.Id, Name = u.Name, 
-                                                    Avatar = u.Avatar, 
-                                                    DateCheckin = uio.DateLastCheckin, 
-                                                    DateCheckout = uio.DateLastCheckout,
-                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" });
-
+                var result = await GetEverybodyInOffice();
 
                 await _notificationHub.Clients.All.ReceiveNotification(result);
 
@@ -89,15 +73,9 @@ namespace Api.Controllers
                     await _officeRepository.Update(o => o.Id == office.Id, office);
                 }
 
-                var listOfUserInOffice = await _officeRepository.List(officeFilter);
-                var userIds = listOfUserInOffice.Select(s => s.UserId).ToList();
+                var result = await GetEverybodyInOffice();
 
-                var filterBuilder = Builders<Users>.Filter;
-                var filter = filterBuilder.In(x => x.Id, userIds);
-
-                var users = await _userRepository.List(filter);
-
-                await _notificationHub.Clients.All.ReceiveNotification(users);
+                await _notificationHub.Clients.All.ReceiveNotification(result);
 
                 return Ok();
             }
@@ -112,38 +90,34 @@ namespace Api.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> ListUsers()
         {
-            try
-            {
-                var officeFilter = OfficeCheckinFilter.BuildPerDate();
-                var office = await _officeRepository.Find(officeFilter);
+           return Ok(await GetEverybodyInOffice());
+        }
 
-                var listOfUserInOffice = await _officeRepository.List(officeFilter);
-                var userIds = listOfUserInOffice.Select(s => s.UserId).ToList();
+        private async Task<List<OfficeDTO>> GetEverybodyInOffice()
+        {
+            var officeFilter = OfficeCheckinFilter.BuildPerDate();
+                    var office = await _officeRepository.Find(officeFilter);
 
-                var filterBuilder = Builders<Users>.Filter;
-                var filter = filterBuilder.In(x => x.Id, userIds);
+                    var listOfUserInOffice = await _officeRepository.List(officeFilter);
+                    var userIds = listOfUserInOffice.Select(s => s.UserId).ToList();
 
-                var users = await _userRepository.List(filter);
+                    var filterBuilder = Builders<Users>.Filter;
+                    var filter = filterBuilder.In(x => x.Id, userIds);
 
-                var result = listOfUserInOffice.Join(users, 
-                                                    uio => uio.UserId,
-                                                    u => u.Id,
-                                                    (uio, u) => new {
-                                                    Id = u.Id, Name = u.Name, 
-                                                    Avatar = u.Avatar, 
-                                                    DateCheckin = uio.DateLastCheckin, 
-                                                    DateCheckout = uio.DateLastCheckout,
-                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" })
-                    .OrderByDescending(s => Math.Max(s.DateCheckin.Ticks, s.DateCheckout.Ticks)).ToList();
+                    var users = await _userRepository.List(filter);
 
-                return Ok(result);
-            }
-             catch(DomainException de)
-            {
-                 return Ok(new ValidationProblemDetails(new Dictionary<string, string[]>{
-                        { "Messages", new string[]{de.Message}}
-                    }));
-            }
+                    var result = listOfUserInOffice.Join(users, 
+                                                        uio => uio.UserId,
+                                                        u => u.Id,
+                                                        (uio, u) => new OfficeDTO{
+                                                        Id = u.Id, Name = u.Name, 
+                                                        Avatar = u.Avatar, 
+                                                        DateCheckin = uio.DateLastCheckin, 
+                                                        DateCheckout = uio.DateLastCheckout,
+                                                        Action = uio.UserInTheOffice ? "Checkin" : "Checkout" })
+                        .OrderByDescending(s => Math.Max(s.DateCheckin.Ticks, s.DateCheckout.Ticks)).ToList();
+
+            return result;
         }
     }
 }
