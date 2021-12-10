@@ -28,11 +28,17 @@ namespace Api.Controllers
                 return Unauthorized();
             }
 
-            // var userFilter = ndew
-            
-            // _officeRepository.Find(u => u.UserId == )
+            var userInOffice = await _officeRepository.Find(OfficeCheckinFilter.BuildUserAndDateWhenCheckin(user.Id));
 
-            return Ok(user);
+            var result = new {
+                                Id = user.Id, 
+                                Name = user.Name, 
+                                Email = user.Email, 
+                                Avatar = user.Avatar, 
+                                InOffice = userInOffice != null ? true : false
+                            };
+
+            return Ok(result);
         }
 
         [HttpPost("signUp")]

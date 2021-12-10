@@ -29,7 +29,7 @@ namespace Api.Controllers
         {
             try
             {
-                var officeFilter = OfficeCheckinFilter.Build(userId);
+                var officeFilter = OfficeCheckinFilter.BuildUserAndDate(userId);
                 var office = await _officeRepository.Find(officeFilter);
 
                 if(office == null){
@@ -66,7 +66,7 @@ namespace Api.Controllers
         {
             try
             {
-                var officeFilter = OfficeCheckinFilter.Build(userId);
+                var officeFilter = OfficeCheckinFilter.BuildUserAndDate(userId);
                 var office = await _officeRepository.Find(officeFilter);
 
                 if(office == null){
