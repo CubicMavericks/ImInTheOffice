@@ -3,7 +3,6 @@ import { Container, Box, Grid, Paper } from "@mui/material";
 
 import CustomAppBar from "./components/CustomAppBar";
 import CheckInButton from "./components/CheckInButton";
-import CheckOutButton from "./components/CheckOutButton";
 import PresenceList from "./components/PresenceList";
 
 import logo from "./assets/mark.svg";
@@ -16,17 +15,7 @@ const App = () => {
       <Box>
         <CustomAppBar />
         <Container maxWidth="md">
-          <Box
-            sx={{
-              m: 3,
-              flexGrow: 1,
-              justifyContent: "space-evenly",
-              display: { xs: "flex", md: "flex" },
-            }}
-          >
-            <CheckInButton />
-            <CheckOutButton />
-          </Box>
+          <CheckInButton />
         </Container>
         <Container maxWidth="md">
           <Box

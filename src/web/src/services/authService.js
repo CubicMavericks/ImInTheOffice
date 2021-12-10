@@ -1,6 +1,6 @@
 import toastr from "toastr";
 
-const signInFailureAlert = () => toastr.error("Please check the e-mail address.", "Unauthorized")
+const signInFailureAlert = () => toastr.error("Please check the e-mail address.", "Unauthorized");
 
 export default class AuthService {
   signIn(email, callback, failCallback) {
