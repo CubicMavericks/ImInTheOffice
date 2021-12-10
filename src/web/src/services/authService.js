@@ -1,5 +1,5 @@
 export default class AuthService {
-  signIn(email, callback) {
+  signIn(email, callback, failCallback) {
     
     const requestOptions = {
       crossDomain: true,
@@ -15,6 +15,11 @@ export default class AuthService {
         if (!response.ok) {
           const error = (data && data.message) || response.status;
           console.error(error);
+
+          if (failCallback) {
+            failCallback();
+          }
+
           return;
         }
 
@@ -24,6 +29,10 @@ export default class AuthService {
       })
       .catch((error) => {
         console.error("There was an error!", error);
+
+        if (failCallback) {
+          failCallback();
+        }
       });
   }
 

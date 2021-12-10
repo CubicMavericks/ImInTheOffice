@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -18,6 +19,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
+  const [signingIn, setSigningIn] = React.useState(false);
 
   let from = location.state?.from?.pathname || "/";
 
@@ -25,10 +27,15 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
+    setSigningIn(true);
 
-    auth.signIn(email, () => {
-      navigate(from, { replace: true });
-    });
+    auth.signIn(email, 
+      () => {
+        navigate(from, { replace: true });
+      },
+      () => {
+        setSigningIn(false);
+      });
   };
 
   return (
@@ -51,6 +58,7 @@ export default function SignIn() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
+            
             sx={{ mt: 1 }}
           >
             <TextField
@@ -69,6 +77,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={signingIn}
             >
               Sign In
             </Button>
