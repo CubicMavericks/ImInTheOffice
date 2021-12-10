@@ -32,7 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="XThreadsFramesViewSplitterKey" value="0.9145299" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.75944334" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -86,6 +86,45 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>102</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="102" containingFunctionPresentation="method 'ListUsers'">
+            <startOffsets>
+              <option value="3775" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3776" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>65</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="65" containingFunctionPresentation="method 'Checkout'">
+            <startOffsets>
+              <option value="2410" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2411" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Api/Controllers/OfficeController.cs</url>
+          <line>28</line>
+          <properties documentPath="$PROJECT_DIR$/Api/Controllers/OfficeController.cs" initialLine="28" containingFunctionPresentation="method 'Checkin'">
+            <startOffsets>
+              <option value="1006" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1007" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

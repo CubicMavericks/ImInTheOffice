@@ -123,7 +123,7 @@ namespace Api.Controllers
                                                     DateCheckin = uio.DateLastCheckin, 
                                                     DateCheckout = uio.DateLastCheckout,
                                                     Action = uio.UserInTheOffice ? "Checkin" : "Checkout" })
-                    .ToList();
+                    .OrderByDescending(s => Math.Max(s.DateCheckin.Ticks, s.DateCheckout.Ticks)).ToList();
 
                 return Ok(result);
             }
