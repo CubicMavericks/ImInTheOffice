@@ -12,9 +12,13 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { useAuth } from "./Auth";
 
+import male from "../assets/male.png";
+import female from "../assets/female.png";
+
 const CustomAppBar = () => {
   const auth = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const avatar = auth.avatar === "male" ? male : female;
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -56,7 +60,7 @@ const CustomAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={auth.user.name} src={avatar} />
               </IconButton>
             </Tooltip>
             <Menu

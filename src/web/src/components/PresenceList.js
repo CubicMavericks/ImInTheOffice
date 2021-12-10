@@ -10,6 +10,9 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Work, Home } from '@mui/icons-material';
 
+import male from "../assets/male.png";
+import female from "../assets/female.png";
+
 export default function PresenceList() {
   // Todo replace this with API call.
   const data = [
@@ -18,21 +21,21 @@ export default function PresenceList() {
       email: "",
       action: "checkOut",
       actionTime: "18:00 P.M",
-      avatar: "",
+      avatar: "male",
     },
     {
       name: "Filipe",
       email: "",
       action: "checkIn",
       actionTime: "09:00 A.M",
-      avatar: "",
+      avatar: "female",
     },
     {
       name: "Alexandre",
       email: "",
       action: "checkIn",
       actionTime: "07:00 A.M",
-      avatar: "",
+      avatar: "male",
     }
   ];
 
@@ -44,7 +47,7 @@ export default function PresenceList() {
           <Box key={index}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar alt={person.name} src={person.avatar} />
+              <Avatar alt={person.name} src={person.avatar === "male" ? male : female}  />
             </ListItemAvatar>
             <ListItemText
               primary={person.name}

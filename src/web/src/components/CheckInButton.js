@@ -5,7 +5,6 @@ import { useState } from "react";
 import OfficeService from "../services/officeService";
 import { useAuth } from "./Auth";
 
-
 const CheckInButton = () => {
   const officeService = new OfficeService();
   const auth = useAuth();
