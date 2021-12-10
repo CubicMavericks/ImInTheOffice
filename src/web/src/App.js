@@ -6,6 +6,8 @@ import CheckInButton from "./components/CheckInButton";
 import CheckOutButton from "./components/CheckOutButton";
 import PresenceList from "./components/PresenceList";
 
+import logo from "./assets/mark.svg";
+
 const theme = createTheme();
 
 const App = () => {
@@ -41,6 +43,9 @@ const App = () => {
               </Paper>
             </Grid>
           </Box>
+        </Container>
+        <Container maxWidth="sm">
+          <img src={logo} alt="logo" />
         </Container>
       </Box>
     </ThemeProvider>
