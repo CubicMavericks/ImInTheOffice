@@ -14,17 +14,14 @@ const requestStatusChange = (userId, resource, successCallback, failCallback, ac
     requestOptions
   )
     .then((response) => {
-      const data = response.json();
-
       if (!response.ok) {
-        const error = (data && data.message) || response.status;
         alertError("Failed to " + action);
 
         if (failCallback) {
           failCallback();
         }
 
-        return error;
+        return;
       }
 
       if (successCallback) {

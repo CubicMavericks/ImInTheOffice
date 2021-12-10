@@ -44,13 +44,13 @@ export default function PresenceList() {
                     color="text.primary"
                   >
                     {person.action === "Checkin" ? "Checked in at " : "Checked out at "}
-                    {person.action === "Checkin" ? person.dateCheckIn : person.dateCheckOut}
+                    {person.action === "Checkin" ? person.dateCheckin : person.dateCheckout}
                   </Typography>
                 </React.Fragment>
               }
             />
             <ListItemIcon>
-              {person.action === "checkIn" ? <Work /> : <Home />}
+              {person.action === "Checkin" ? <Work /> : <Home />}
             </ListItemIcon>
           </ListItem>
           {index !== (peopleInTheOffice.length - 1) && <Divider variant="inset" component="li" />}

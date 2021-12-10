@@ -9,16 +9,18 @@ const CheckInButton = () => {
   const officeService = new OfficeService();
   const auth = useAuth();
 
-  const [checkingIn, setCheckingIn] = useState(false);
-  const [checkingOut, setCheckingOut] = useState(false);
+  const [checkingIn, setCheckingIn] = useState(auth.user.inOffice);
+  const [checkingOut, setCheckingOut] = useState(!auth.user.inOffice);
 
   const handleCheckInOnClick = () => {
     setCheckingIn(true);
     officeService.checkIn(auth.user.id,
       () => {
+        auth.setOfficeState(true);
         setCheckingOut(false);
       },
       () => {
+        auth.setOfficeState(false);
         setCheckingIn(false);
       });
   };
@@ -27,9 +29,11 @@ const CheckInButton = () => {
     setCheckingOut(true);
     officeService.checkOut(auth.user.id,
       () => {
+        auth.setOfficeState(false);
         setCheckingIn(false);
       },
       () => {
+        auth.setOfficeState(true);
         setCheckingOut(false);
       });
   }

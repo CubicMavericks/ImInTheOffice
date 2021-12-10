@@ -58,7 +58,12 @@ export function AuthProvider({children}) {
         });
     }
 
-    let value = { user, signIn, signOut };
+    const setOfficeState = (inOffice) => {
+      user.inOffice = inOffice;
+      setUser(user);
+    }
+
+    let value = { user, signIn, signOut, setOfficeState };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
