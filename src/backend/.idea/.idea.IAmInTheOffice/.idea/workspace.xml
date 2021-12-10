@@ -16,6 +16,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7262732eee179af215faab36a7f3c3cfac93ba12af52a3888d839fe7e53420/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/86d9944d7dc6247b332d77355bfabdb7cd68928cf33921b80ea70c795ef7c26/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a89c43b9e4639a86ef72bfbdd915cf3a88d4582ea46a7bc809f17b1baa77abf/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -75,13 +76,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Api/Controllers/UserController.cs</url>
-          <line>32</line>
+          <line>45</line>
           <properties documentPath="$PROJECT_DIR$/Api/Controllers/UserController.cs" initialLine="32" containingFunctionPresentation="method 'SignUp'">
             <startOffsets>
-              <option value="860" />
+              <option value="1500" />
             </startOffsets>
             <endOffsets>
-              <option value="861" />
+              <option value="1501" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />

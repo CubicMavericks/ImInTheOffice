@@ -122,7 +122,8 @@ namespace Api.Controllers
                                                     Avatar = u.Avatar, 
                                                     DateCheckin = uio.DateLastCheckin, 
                                                     DateCheckout = uio.DateLastCheckout,
-                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" });
+                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" })
+                    .ToList();
 
                 return Ok(result);
             }
