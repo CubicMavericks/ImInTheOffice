@@ -61,7 +61,7 @@ namespace Api.Controllers
             }
         }
 
-         [HttpPost("checkout/{userId}")]
+        [HttpPost("checkout/{userId}")]
         public async Task<IActionResult> Checkout(string userId)
         {
             try
@@ -89,6 +89,42 @@ namespace Api.Controllers
                 await _notificationHub.Clients.All.ReceiveNotification(users);
 
                 return Ok();
+            }
+             catch(DomainException de)
+            {
+                 return Ok(new ValidationProblemDetails(new Dictionary<string, string[]>{
+                        { "Messages", new string[]{de.Message}}
+                    }));
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> ListUsers()
+        {
+            try
+            {
+                var officeFilter = OfficeCheckinFilter.BuildPerDate();
+                var office = await _officeRepository.Find(officeFilter);
+
+                var listOfUserInOffice = await _officeRepository.List(officeFilter);
+                var userIds = listOfUserInOffice.Select(s => s.UserId).ToList();
+
+                var filterBuilder = Builders<Users>.Filter;
+                var filter = filterBuilder.In(x => x.Id, userIds);
+
+                var users = await _userRepository.List(filter);
+
+                var result = listOfUserInOffice.Join(users, 
+                                                    uio => uio.UserId,
+                                                    u => u.Id,
+                                                    (uio, u) => new {
+                                                    Id = u.Id, Name = u.Name, 
+                                                    Avatar = u.Avatar, 
+                                                    DateCheckin = uio.DateLastCheckin, 
+                                                    DateCheckout = uio.DateLastCheckout,
+                                                    Action = uio.UserInTheOffice ? "Checkin" : "Checkout" });
+
+                return Ok(result);
             }
              catch(DomainException de)
             {

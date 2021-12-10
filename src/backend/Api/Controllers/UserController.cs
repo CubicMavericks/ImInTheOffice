@@ -9,10 +9,13 @@ namespace Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IRepository<Users> _userRepository;
+        private readonly IRepository<Office> _officeRepository;
 
-        public UserController(IRepository<Users> userRepository)
+        public UserController(IRepository<Users> userRepository,
+                              IRepository<Office> officeRepository)
         {
             _userRepository = userRepository;
+            _officeRepository = officeRepository;
         }
 
         [HttpPost("signIn")]
@@ -24,7 +27,11 @@ namespace Api.Controllers
             {
                 return Unauthorized();
             }
+
+            // var userFilter = ndew
             
+            // _officeRepository.Find(u => u.UserId == )
+
             return Ok(user);
         }
 
